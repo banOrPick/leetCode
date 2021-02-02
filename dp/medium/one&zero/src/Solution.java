@@ -40,7 +40,7 @@ class Solution {
     }
 
     public static void main(String[] args) {
-        int maxForm = findMaxForm(new String[] {"10", "0001", "111001", "1", "0"}, 5, 3);
+        int maxForm = findMaxForm(new String[] {"0001", "111001","10", "1", "0"}, 5, 3);
         System.out.println(maxForm);
     }
 }
