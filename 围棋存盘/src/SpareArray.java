@@ -21,6 +21,7 @@ public class SpareArray {
                 }
             }
         }
+        //非0个数
         System.out.println(sum);
         int[][] spareArray = new int[sum + 1][3];
         spareArray[0][0] = 11;
@@ -38,7 +39,34 @@ public class SpareArray {
             }
         }
 
+        // 输出稀疏数组的形式
+        System.out.println();
+        System.out.println("得到稀疏数组为~~~~");
         for (int[] row : spareArray) {
+            for (int data : row) {
+                System.out.printf("%d\t", data);
+            }
+            System.out.println();
+        }
+
+        //将稀疏数组 --》 恢复成 原始的二维数组
+		/*
+		 *  1. 先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组，比如上面的  chessArr2 = int [11][11]
+			2. 在读取稀疏数组后几行的数据，并赋给 原始的二维数组 即可.
+		 */
+
+        //1. 先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组
+
+        int[][] ints1 = new int[spareArray[0][0]][spareArray[0][1]];
+        for (int i = 1; i < spareArray.length; i++) {
+            ints1[spareArray[i][0]][spareArray[i][1]] = spareArray[i][2];
+        }
+
+        // 输出恢复后的二维数组
+        System.out.println();
+        System.out.println("恢复后的二维数组");
+
+        for (int[] row : ints1) {
             for (int data : row) {
                 System.out.printf("%d\t", data);
             }
