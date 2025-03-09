@@ -19,7 +19,7 @@ public class 计算三叉搜索树的高度 {
 
 }
 
-class ThreeTree {
+ class ThreeTree {
 
     public int value;
     public ThreeTree leftNode;

@@ -36,8 +36,8 @@ public class 服务器广播需要广播的服务器数量 {
 
     private static void dfs(int[][] arr, List<Integer> queue, int index) {
         queue.add(index);
-        for (int i = index+1; i < arr.length; i++) {
-            if (arr[index][i]==1&&!queue.contains(i)) {
+        for (int i = index + 1; i < arr.length; i++) {
+            if (arr[index][i] == 1 && !queue.contains(i)) {
                 dfs(arr, queue, i);
             }
         }
