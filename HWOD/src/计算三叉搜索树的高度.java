@@ -8,9 +8,9 @@ public class 计算三叉搜索树的高度 {
         Scanner scanner = new Scanner(System.in);
         int n = Integer.parseInt(scanner.nextLine());
         List<Integer> list = Arrays.stream(scanner.nextLine().split(" ")).map(m -> Integer.parseInt(m)).collect(Collectors.toList());
-        ThreeTree root=new ThreeTree(list.get(0),null,null,null);
+        ThreeTree root = new ThreeTree(list.get(0), null, null, null);
         for (int i = 1; i < list.size(); i++) {
-            root.insert(root,list.get(i));
+            root.insert(root, list.get(i));
         }
         System.out.println(root.getHeight(root));
 
@@ -19,7 +19,7 @@ public class 计算三叉搜索树的高度 {
 
 }
 
- class ThreeTree {
+class ThreeTree {
 
     public int value;
     public ThreeTree leftNode;
@@ -33,9 +33,6 @@ public class 计算三叉搜索树的高度 {
         this.rightNode = rightNode;
     }
 
-    public ThreeTree(int value) {
-        this.value = value;
-    }
 
     public void insert(ThreeTree node, int value) {
         int rootValue = node.value;

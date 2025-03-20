@@ -4,28 +4,41 @@ import java.util.Scanner;
 
 public class 最大报酬 {
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
-        int T = scanner.nextInt(); // 工作时长
-        int n = scanner.nextInt(); // 工作数量
-        int[][] works = new int[n][2];
+        // 读取工作时长 T
+        int T = scanner.nextInt();
+        // 读取工作数量 n
+        int n = scanner.nextInt();
+
+        // 存储每项工作的耗时和报酬
+        int[][] tasks = new int[n][2];
         for (int i = 0; i < n; i++) {
-            works[i][0] = scanner.nextInt();
-            works[i][1] = scanner.nextInt();
+            // 读取第 i 项工作的耗时
+            tasks[i][0] = scanner.nextInt();
+            // 读取第 i 项工作的报酬
+            tasks[i][1] = scanner.nextInt();
         }
-        int minTime=Integer.MAX_VALUE;
-        for (int[] work:works){
-            minTime = Math.min(minTime,work[0]);
-        }
-        int[][] dp = new int[n + 1][T + 1]; // 动态规划数组
+
+        // 创建动态规划数组 dp，dp[i][j] 表示前 i 项工作在 j 时间内的最大报酬
+        int[][] dp = new int[n + 1][T + 1];
+
+        // 动态规划过程
         for (int i = 1; i <= n; i++) {
-            for (int j = minTime; j <= T; j++) {
-                int last = dp[i - 1][j]; // 不选当前工作
-                int current = works[i - 1][0] > j ? 0 : works[i - 1][1] + dp[i - 1][j - works[i - 1][0]]; // 选当前工作
-                dp[i][j] = Math.max(last, current); // 取最大值
+            for (int j = 0; j <= T; j++) {
+                // 如果当前工作的耗时大于当前可用时间 j，则不选择该工作
+                if (tasks[i - 1][0] > j) {
+                    dp[i][j] = dp[i - 1][j];
+                } else {
+                    // 选择该工作和不选择该工作的报酬取最大值
+                    dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - tasks[i - 1][0]] + tasks[i - 1][1]);
+                }
             }
         }
-        System.out.print(dp[n][T]);
+
+        // 输出在指定工作时长内的最大报酬
+        System.out.println(dp[n][T]);
+        scanner.close();
+
 //        Scanner scanner = new Scanner(System.in);
 //        int T = scanner.nextInt(); // 工作时长
 //        int n = scanner.nextInt(); // 工作数量

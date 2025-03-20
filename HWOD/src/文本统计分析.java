@@ -2,98 +2,105 @@ import java.util.Scanner;
 
 public class 文本统计分析 {
     public static void main(String[] args) {
-        // 创建Scanner对象用于获取用户输入
         Scanner scanner = new Scanner(System.in);
-        // 使用StringBuilder来构建整个输入文本
         StringBuilder input = new StringBuilder();
-        // 循环读取每一行输入直到没有新的输入
         while (scanner.hasNextLine()) {
-            // 将读取的每一行追加到StringBuilder对象，并添加换行符
             String s = scanner.nextLine();
             input.append(s).append("\n");
             if (s.equals("")) {
                 break;
             }
         }
-        // 关闭Scanner对象
         scanner.close();
-        // 输出文本统计结果
         System.out.println(countTexts(input.toString()));
     }
 
     // 统计文本中的文本数量
     private static int countTexts(String input) {
-        // 初始化计数器
         int count = 0;
-        // 标记是否在字符串内部
         boolean inString = false;
-        // 标记是否在注释内部
         boolean inComment = false;
-        // 记录字符串分隔符
         char stringDelimiter = 0;
-        // 标记当前是否为空文本（即没有遇到非空白字符）
         boolean isEmpty = true;
 
-        // 遍历输入文本的每个字符
         for (int i = 0; i < input.length(); i++) {
-            // 当前字符
             char c = input.charAt(i);
-            // 下一个字符（如果存在）
             char nextChar = (i + 1 < input.length()) ? input.charAt(i + 1) : '\0';
 
-            // 如果在注释中
             if (inComment) {
-                // 如果遇到换行符，则注释结束
-                if (c == '\n') {
-                    inComment = false;
-                }
+                inComment = handleComment(c);
                 continue;
             }
 
-            // 如果遇到连续的两个减号，并且不在字符串内，则进入注释状态
-            if (c == '-' && nextChar == '-' && !inString) {
+            if (isStartOfComment(c, nextChar, inString)) {
                 inComment = true;
+                i++;
                 continue;
             }
 
-            // 如果遇到单引号或双引号，并且不在字符串内，则进入字符串状态
-            if ((c == '\'' || c == '\"') && !inString) {
+            if (isStartOfString(c, inString)) {
                 inString = true;
                 stringDelimiter = c;
                 isEmpty = false;
                 continue;
             }
 
-            // 如果在字符串内，并且遇到了相同的分隔符，则检查是否为转义
-            if (c == stringDelimiter && inString) {
-                if (nextChar == stringDelimiter) {
-                    i++; // 跳过转义的引号
-                } else {
-                    inString = false; // 字符串结束
-                }
+            if (inString) {
+                inString = handleString(c, input, i, stringDelimiter);
                 continue;
             }
 
-            // 如果遇到分号，并且不在字符串内，则增加计数器
-            if (c == ';' && !inString) {
-                if (!isEmpty) {
-                    count++;
-                    isEmpty = true;
-                }
+            if (isEndOfText(c, inString, isEmpty)) {
+                count++;
+                isEmpty = true;
                 continue;
             }
 
-            // 如果遇到非空白字符，并且不在字符串内，则标记为非空文本
-            if (!Character.isWhitespace(c) && !inString) {
+            if (isNonEmptyText(c, inString)) {
                 isEmpty = false;
             }
         }
 
-        // 如果最后一个文本没有闭合的分号，则增加计数器
         if (!isEmpty) {
-            count++; // 最后一个文本没有闭合分号
+            count++;
         }
 
         return count;
+    }
+
+    // 处理注释状态
+    private static boolean handleComment(char c) {
+        return c != '\n';
+    }
+
+    // 判断是否为注释开始
+    private static boolean isStartOfComment(char c, char nextChar, boolean inString) {
+        return c == '-' && nextChar == '-' && !inString;
+    }
+
+    // 判断是否为字符串开始
+    private static boolean isStartOfString(char c, boolean inString) {
+        return (c == '\'' || c == '\"') && !inString;
+    }
+
+    // 处理字符串状态
+    private static boolean handleString(char c, String input, int index, char delimiter) {
+        if (c == delimiter) {
+            if (index > 0 && input.charAt(index - 1) == '\\') {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    // 判断是否为文本结束
+    private static boolean isEndOfText(char c, boolean inString, boolean isEmpty) {
+        return c == ';' && !inString && !isEmpty;
+    }
+
+    // 判断是否为非空文本
+    private static boolean isNonEmptyText(char c, boolean inString) {
+        return !Character.isWhitespace(c) && !inString;
     }
 }

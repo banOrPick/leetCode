@@ -9,11 +9,16 @@ public class 跳房子I {
         int count = Integer.parseInt(sc.nextLine());
         String result = "";
         boolean flag = true;
+        // 初始化最小索引和为最大整数值
+        int minIdxSum = Integer.MAX_VALUE;
         for (int i = 0; i < inputInts.length && flag; i++) {
-            for (int j = i+1; j < inputInts.length; j++) {
+            for (int j = i + 1; j < inputInts.length; j++) {
                 if (inputInts[i] + inputInts[j] == count) {
-                    result = "[" + inputInts[i] + "," + inputInts[j] + "]";
-                    flag = false;
+                    int tmpSUm = i + j;
+                    if (tmpSUm < minIdxSum) {
+                        minIdxSum = tmpSUm;
+                        result = "[" + inputInts[i] + "," + inputInts[j] + "]";
+                    }
                     break;
                 }
 

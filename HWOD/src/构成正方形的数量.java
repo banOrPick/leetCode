@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class 构成正方形的数量 {
     static class Point {
         int x;
@@ -14,10 +15,7 @@ public class 构成正方形的数量 {
             this.y = y;
         }
 
-        boolean equals(Point p) {
-            return this.x ==
-                    p.x && this.y == p.y;
-        }
+
 
         static Boolean isZFX(Point p1, Point p2, Point p3, Point p4) {
             if (mathMo(p1, p4) == mathMo(p2, p3) && mathMo(p1, p2) == mathMo(p1, p3)&&mathMo(p2, p4) == mathMo(p3, p4)&&mathMo(p1, p2) == mathMo(p2, p4)) {

@@ -11,6 +11,7 @@ public class 水仙花数 {
         double currentResult = 0;
         if(n<3||n>7){
             System.out.println(-1);
+            return;
         }
         for (double i = start; i < end; i++) {
             if (isShuixianhua(i, n)) {

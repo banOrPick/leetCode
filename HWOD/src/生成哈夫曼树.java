@@ -10,7 +10,7 @@ public class 生成哈夫曼树 {
         String[] input = scanner.nextLine().split(" ");
         Tree root = buildTree(input);
         StringBuilder result = new StringBuilder();
-        inorderTraversal(root,result);
+        inorderTraversal(root, result);
         System.out.println(result.toString().trim());
         scanner.close();
     }
@@ -26,7 +26,9 @@ public class 生成哈夫曼树 {
             linkedList.add(tree);
         }
         while (linkedList.size() > 1) {
-            linkedList.sort(Comparator.comparingInt(Tree::getValue));
+            linkedList.sort((a,b)->{
+                return a.value!=b.value?a.value-b.value:a.height-b.height;
+            });
             Tree left = linkedList.get(0);
             Tree right = linkedList.get(1);
             int parentValue = right.getValue() + left.getValue();
@@ -42,6 +44,7 @@ public class 生成哈夫曼树 {
 
         return linkedList.get(0);
     }
+
     // 中序遍历哈夫曼树，并将遍历结果保存为字符串
     public static void inorderTraversal(Tree root, StringBuilder result) {
         if (root != null) {
@@ -90,12 +93,6 @@ public class 生成哈夫曼树 {
             this.height = height;
         }
 
-        public Tree(Tree left, Tree right, int value, int height) {
-            this.left = left;
-            this.right = right;
-            this.value = value;
-            this.height = height;
-        }
 
         public Tree() {
         }

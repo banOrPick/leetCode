@@ -9,28 +9,32 @@ public class 最小的调整次数特异性双端队列 {
         Queue<Integer> queue = new LinkedList<>();
         int addNums = 0;
         boolean isOrder = true;
+
         for (int i = 0; i < n * 2; i++) {
             String inputString = scanner.nextLine();
             String[] split = inputString.split(" ");
-            if (split[0].equals("head")) {
+            String command = split[0];
+
+            if (command.equals("head")) {
                 if (!queue.isEmpty()) {
                     isOrder = false;
                 }
                 queue.add(Integer.parseInt(split[2]));
-            } else if (split[0].equals("tail")) {
+            } else if (command.equals("tail")) {
                 queue.add(Integer.parseInt(split[2]));
             } else {
-                if (queue.isEmpty()) {
-                    continue;
-                }
-                queue.remove();
-                if (!isOrder) {
-                    addNums++;
-                    isOrder = true;
+                if (!queue.isEmpty()) {
+                    queue.poll();
+                    if (!isOrder && queue.isEmpty()) {
+                        addNums++;
+                        isOrder = true;
+                    }
                 }
             }
         }
+
         System.out.println(addNums);
+        scanner.close();
     }
 }
 

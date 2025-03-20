@@ -12,7 +12,6 @@ public class 猜数字 {
         for (int j = 0; j <= 9999; j++) {
             resultList.add(String.format("%04d", j));
         }
-        long start = System.currentTimeMillis();
         for (int i = 0; i < n; i++) {
             String[] split = scanner.nextLine().split(" ");
             String intput = String.format("%04d", Integer.parseInt(split[0]));
@@ -26,8 +25,6 @@ public class 猜数字 {
         } else {
             System.out.println(resultList.get(0));
         }
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
     }
 
     private static List<String> getMatch(List<String> resultList, int a, int b, String intput) {

@@ -55,7 +55,7 @@ we are not a team
 we are a team
 da pian zi
  */
-public class 根据消息判断a和b是否在同一个队伍 {
+public class WeAreATeam {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String nm = scanner.nextLine();

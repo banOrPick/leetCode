@@ -9,8 +9,8 @@ public class 简易压缩算法一种字符串压缩表示的解压 {
             char currentChar = line.charAt(i);
             if (currentChar <= '9' && currentChar > '2') {
                 int n = Integer.parseInt(String.valueOf(currentChar));
-                for (int j = 1; j <= n; j++) {
-                    result.append(line.charAt(i));
+                for (int j = 1; j < n; j++) {
+                    result.append(line.charAt(i+1));
                 }
             } else if (currentChar >= '0' && currentChar <= '2') {
                 System.out.println("!error");

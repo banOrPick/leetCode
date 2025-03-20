@@ -63,7 +63,7 @@ import java.util.stream.Collectors;
  * <p>
  * 原VLAN资源池中有VLAN 1、2、3，5，申请的VLAN 10不在原资源池中，将原资源池按照题目描述格式并按升序排序后输出的结果为1-3,5。
  **/
-public class VLAN池中申请VLAN升序输出VLAN池 {
+public class VLAN资源池 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String vlanPool = scanner.nextLine();

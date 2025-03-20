@@ -15,12 +15,6 @@ public class 电脑病毒感染 {
         int nextId;
         int time;
 
-        public Computer(int id, int nextId, int time) {
-            this.id = id;
-            this.nextId = nextId;
-            this.time = time;
-        }
-
         public Computer() {
         }
     }
@@ -52,8 +46,6 @@ public class 电脑病毒感染 {
         } else {
             System.out.println(-1);
         }
-
-
     }
 
     private static List<Computer> getComputerList(int currentId, Computer[] computers) {

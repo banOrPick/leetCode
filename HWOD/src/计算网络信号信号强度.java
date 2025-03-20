@@ -24,15 +24,7 @@ public class 计算网络信号信号强度 {
             if (ints[tmp[0]][tmp[1]] == 1) {
                 break;
             }
-            int[][] dirs = new int[4][2];
-            dirs[0][0] = -1;
-            dirs[0][1] = 0;
-            dirs[1][0] = 1;
-            dirs[1][1] = 0;
-            dirs[2][0] = 0;
-            dirs[2][1] = -1;
-            dirs[3][0] = 0;
-            dirs[3][1] = 1;
+            int[][] dirs =  {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
             for (int[] dir : dirs) {
                 int i = tmp[0] + dir[0];
                 int j = tmp[1] + dir[1];
