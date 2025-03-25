@@ -43,6 +43,8 @@
 //
 // Related Topics 数组 哈希表 👍 15499 👎 0
 
+import java.util.HashMap;
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public int[] twoSum(int[] nums, int target) {
