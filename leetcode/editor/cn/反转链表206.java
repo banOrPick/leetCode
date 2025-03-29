@@ -1,9 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
 
-public class 反转链表 {
+public class 反转链表206 {
     public static void main(String[] args) {
         ListNode first = new ListNode(1);
         ListNode sc = new ListNode(2);
