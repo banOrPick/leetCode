@@ -27,11 +27,10 @@ public class 滑动窗口最大值239 {
 
     public static int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        PriorityQueue<int[]> pq = new PriorityQueue<int[]>(new Comparator<int[]>() {
-            public int compare(int[] pair1, int[] pair2) {
-                return pair1[0] != pair2[0] ? pair2[0] - pair1[0] : pair2[1] - pair1[1];
-            }
-        });
+        PriorityQueue<int[]> pq = new PriorityQueue<>((pair1, pair2) ->
+                pair1[0] != pair2[0] ? pair2[0] - pair1[0] : pair2[1] - pair1[1]
+        );
+        Deque<int[]> deque = new LinkedList<>();
         for (int i = 0; i < k; ++i) {
             pq.offer(new int[]{nums[i], i});
         }
