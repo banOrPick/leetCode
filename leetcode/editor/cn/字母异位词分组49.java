@@ -1,5 +1,3 @@
-package doc;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
