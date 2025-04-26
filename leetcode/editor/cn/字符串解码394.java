@@ -10,7 +10,7 @@ public class 字符串解码394 {
     }
 
     //递归解法
-    public String decodeString(String s) {
+    public synchronized String decodeString(String s) {
         for (int i = s.length() - 1; i >= 0; i--) {
             if (s.charAt(i) == '[') {
                 int start = i -1;
