@@ -9,7 +9,8 @@ public class 反转链表206 {
         first.next = sc;
         sc.next = thr;
         thr.next = four;
-        reverseList(first);
+        ListNode listNode = reverseList(first);
+        System.out.println(listNode);
     }
 
     public static class ListNode {
@@ -29,27 +30,53 @@ public class 反转链表206 {
         }
     }
 
+    //栈
+//    public static ListNode reverseList(ListNode head) {
+//        Stack<ListNode> list = new Stack<>();
+//        while (head != null) {
+//            list.push(head);
+//            head = head.next;
+//        }
+//        ListNode result = new ListNode();
+//        if (list.isEmpty()) {
+//            return null;
+//        }
+//        result = list.pop();
+//        ListNode  tmp=result;
+//        result.next=null;
+//        while (!list.isEmpty()) {
+//            ListNode next = list.pop();
+//            next.next = null;
+//            result.next = next;
+//            result = next;
+//        }
+//        return tmp;
+//    }
+
+    //迭代
+//    public static ListNode reverseList(ListNode head) {
+//        ListNode prev=null, next;
+//        ListNode current = head;
+//        while (current!= null) {
+//            next = current.next;
+//            current.next=prev;
+//            prev = current;
+//            current = next;
+//
+//        }
+//        return prev;
+//    }
+    //递归
     public static ListNode reverseList(ListNode head) {
-        Stack<ListNode> list = new Stack<>();
-        while (head != null) {
-            list.push(head);
-            head = head.next;
+        if (head == null || head.next == null) {
+            return head;
         }
-        ListNode result = new ListNode();
-        if (list.isEmpty()) {
-            return null;
-        }
-        result = list.pop();
-        ListNode  tmp=result;
-        result.next=null;
-        while (!list.isEmpty()) {
-            ListNode next = list.pop();
-            next.next = null;
-            result.next = next;
-            result = next;
-        }
-        return tmp;
+        ListNode newHead = reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return newHead;
     }
+
 }
 
 
